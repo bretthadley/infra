@@ -20,6 +20,7 @@ EOF
 remote_state {
   backend = "gcs"
   config = {
+    project = local.account_id
     bucket   = "${local.account_name}-terraform-state"
     prefix   = "${path_relative_to_include()}/terraform.tfstate"
     location = local.gcs_location
