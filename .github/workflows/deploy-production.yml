@@ -13,7 +13,7 @@ jobs:
     uses: bretthadley/infra/.github/workflows/_terragrunt-workflow.yml@main
     with:
       environment_name: production
-      apply: false
+      apply: true
     secrets:
       PROVIDER_NAME: ${{secrets.PROVIDER_NAME_PRODUCTION}}
       SA_EMAIL: ${{secrets.SA_EMAIL_PRODUCTION}}
