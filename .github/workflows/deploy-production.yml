@@ -15,5 +15,5 @@ jobs:
       environment_name: production
       apply: false
     secrets:
-      PROVIDER_NAME: ${{secrets.PROVIDER_NAME}}
-      SA_EMAIL: ${{secrets.SA_EMAIL}}
+      PROVIDER_NAME: ${{secrets.PROVIDER_NAME_PRODUCTION}}
+      SA_EMAIL: ${{secrets.SA_EMAIL_PRODUCTION}}
