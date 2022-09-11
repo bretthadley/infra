@@ -1,0 +1,70 @@
+name: Terragrunt Workflow
+on:
+  workflow_call:
+    inputs:
+      apply:
+        description: "Whether the job should apply after plan"
+        default: false
+      environment_name:
+        description: "Environment/GCP Account being targeted."
+        default: "develop"
+        required: true
+      root:
+        description: "Root folder the terragrunt environment lives"
+        default: "live"
+    secrets:
+      PROVIDER_NAME:
+        description: "OIDC"
+        required: true
+      SA_EMAIL:
+        description: "OIDC"
+        required: true
+
+permissions:
+  id-token: write
+  contents: read
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      #Authenticate with gcloud
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          workload_identity_provider: '${{ inputs.PROVIDER_NAME }}'
+          service_account: '${{ secrets.SA_EMAIL }}'
+
+      - name: Setup Terragrunt
+        uses: autero1/action-terragrunt@v1.1.1
+        with:
+          terragrunt_version: latest
+
+      # Checks that all Terraform configuration files adhere to a canonical format
+      - name: Terragrunt Validate ${{ inputs.environment_name }}
+        run: terragrunt run-all validate
+        shell: bash
+
+      # Generates an execution plan for Terraform
+      - name: Terragrunt Plan ${{ inputs.environment_name }}
+        run: |
+            cd ${{ inputs.root }}/${{ inputs.environment_name }}
+            terragrunt run-all plan
+        shell: bash
+
+        # On push to "main", build or change infrastructure according to Terraform configuration files
+        # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+      - name: Terragrunt Apply ${{ inputs.environment_name }}
+        if: ${{ inputs.apply == true }}
+        run: |
+          cd ${{ inputs.environment_name }}
+          terragrunt run-all apply
+        shell: bash
