@@ -27,11 +27,7 @@ inputs:
 permissions:
   id-token: write
   contents: read
-
-env:
-  ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ inputs.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
-  ACTIONS_ID_TOKEN_REQUEST_URL: ${{ inputs.ACTIONS_ID_TOKEN_REQUEST_URL }}
-
+  
 runs:
   using: "composite"
   steps:
