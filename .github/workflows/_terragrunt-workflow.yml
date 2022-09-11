@@ -5,7 +5,7 @@ on:
       apply:
         description: "Whether the job should apply after plan"
         default: false
-        type: string
+        type: boolean
       environment_name:
         description: "Environment/GCP Account being targeted."
         default: "develop"
