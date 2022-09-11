@@ -21,15 +21,15 @@ runs:
 
   #Authenticate with gcloud
   - id: 'auth'
-      uses: 'google-github-actions/auth@v0'
-      with:
-        workload_identity_provider: '${{ inputs.workload_identity_provider }}'
-        service_account: '${{ inputs.service_account }}'
+    uses: 'google-github-actions/auth@v0'
+    with:
+      workload_identity_provider: '${{ inputs.workload_identity_provider }}'
+      service_account: '${{ inputs.service_account }}'
 
   - name: Setup Terragrunt
-      uses: autero1/action-terragrunt@v1
-      with:
-        terragrunt_version: latest
+    uses: autero1/action-terragrunt@v1
+    with:
+      terragrunt_version: latest
 
   # Checks that all Terraform configuration files adhere to a canonical format
   - name: Terragrunt Validate ${{ inputs.environment_name }}
@@ -46,7 +46,7 @@ runs:
     # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
   - name: Terragrunt Apply ${{ inputs.environment_name }}
     if: ${{ inputs.apply == true }}
-      run: |
-        cd ${{ inputs.environment_name }}
-        terragrunt run-all apply
-      shell: bash
+    run: |
+      cd ${{ inputs.environment_name }}
+      terragrunt run-all apply
+    shell: bash
