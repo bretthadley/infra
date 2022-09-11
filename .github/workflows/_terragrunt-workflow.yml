@@ -28,7 +28,7 @@ permissions:
   contents: read
   
 jobs:
-  build:
+  terraform:
     runs-on: ubuntu-latest
     defaults:
       run:
