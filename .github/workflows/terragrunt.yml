@@ -51,10 +51,6 @@ jobs:
         terragrunt_version: latest
 
     - name: Terragrunt Validate ${{ inputs.environment_name }}
-      run: terragrunt run-all init
-      shell: bash
-
-    - name: Terragrunt Validate ${{ inputs.environment_name }}
       run: terragrunt run-all validate
       shell: bash
 
