@@ -27,7 +27,7 @@ runs:
       service_account: '${{ inputs.service_account }}'
 
   - name: Setup Terragrunt
-    uses: autero1/action-terragrunt@v1
+    uses: autero1/action-terragrunt@v1.1.1
     with:
       terragrunt_version: latest
 
