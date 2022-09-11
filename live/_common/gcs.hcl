@@ -16,12 +16,3 @@ inputs = {
     first = true
   }
 }
-
-
-gcloud iam service-accounts create "github-ci"
-saId="github-ci@${projectId}.iam.gserviceaccount.com"
-
-gitHubRepoName="bretthadley/infra"
-gcloud iam service-accounts add-iam-policy-binding github@bretthadley-200914.iam.gserviceaccount.com \
-  --role "roles/iam.workloadIdentityUser" \
-  --member "principalSet://iam.googleapis.com/projects/74754352612/locations/global/workloadIdentityPools/default/attribute.repository/bretthadley/infra"
