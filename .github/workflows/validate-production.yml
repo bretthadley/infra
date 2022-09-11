@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   terragrunt:
-    uses: bretthadley/infra/.github/workflows/_terragrunt-workflow.yml@main
+    uses: unlevelltd/infra/.github/workflows/_terragrunt-workflow.yml@main
     with:
       environment_name: production
       apply: false
