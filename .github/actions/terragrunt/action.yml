@@ -11,6 +11,12 @@ inputs:
   root:
     description: "Root folder the terragrunt environment lives"
     default: "live"
+  workload_identity_provider:
+    description: "gcp auth"
+    required: true
+  service_account:
+    description: "gcp auth"
+    required: true
     
 runs:
   using: "composite"
