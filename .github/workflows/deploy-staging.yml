@@ -1,4 +1,4 @@
-name: 'Terraform Check'
+name: 'Terraform Staging Deploy'
 
 on:
   push:
@@ -9,23 +9,11 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
-    name: Terraform
-    runs-on: ubuntu-latest
-    environment: staging
-    defaults:
-      run:
-        shell: bash
-    steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
-      
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terragrunt
-      uses: ./.github/actions/terragrunt
-      with:
-        workload_identity_provider: '${{ secrets.PROVIDER_NAME }}'
-        service_account: '${{ secrets.SA_EMAIL }}'
-        environment_name: staging
-        apply: false
+  terragrunt:
+    uses: bretthadley/infra/.github/workflows/_terragrunt-workflow.yml@main
+    with:
+      environment_name: staging
+      apply: false
+    secrets:
+      PROVIDER_NAME: ${{secrets.PROVIDER_NAME}}
+      SA_EMAIL: ${{secrets.SA_EMAIL}}
