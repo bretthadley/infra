@@ -12,12 +12,12 @@ resource "google_project_iam_member" "project" {
 module "oidc" {
   source      = "terraform-google-modules/github-actions-runners/google//modules/gh-oidc"
   project_id  = var.project_id
-  pool_id     = "pool"
-  provider_id = "pool"
+  pool_id     = "github"
+  provider_id = "infra"
   sa_mapping = {
     (google_service_account.sa.account_id) = {
       sa_name   = google_service_account.sa.name
-      attribute = "attribute.repository_owner/unlevelltd/*"
+      attribute = "attribute.repository/unlevelltd/*"
     }
   }
 }
