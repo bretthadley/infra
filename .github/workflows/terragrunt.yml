@@ -5,13 +5,16 @@ on:
       apply:
         description: "Whether the job should apply after plan"
         default: false
+        type: string
       environment_name:
         description: "Environment/GCP Account being targeted."
         default: "develop"
         required: true
+        type: string
       root:
         description: "Root folder the terragrunt environment lives"
         default: "live"
+        type: string
     secrets:
       PROVIDER_NAME:
         description: "OIDC"
