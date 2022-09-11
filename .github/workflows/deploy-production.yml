@@ -1,0 +1,30 @@
+name: 'Terraform Check'
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        shell: bash
+      with:
+        workload_identity_provider: '${{ secrets.PROVIDER_NAME }}'
+        service_account: '${{ secrets.SA_EMAIL }}'
+        environment_name: production
+        apply: false
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    # Checks that all Terraform configuration files adhere to a canonical format
+    - name: Terragrunt
+      uses: ./.github/actions/terragrunt
