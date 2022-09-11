@@ -7,3 +7,8 @@ variable "sa_name" {
   type        = string
   description = "The service account name"
 }
+
+variable "sa_roles" {
+  type        = list(string)
+  description = "The service account roles"
+}
