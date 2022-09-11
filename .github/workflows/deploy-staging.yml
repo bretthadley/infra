@@ -15,5 +15,5 @@ jobs:
       environment_name: staging
       apply: false
     secrets:
-      PROVIDER_NAME: ${{secrets.PROVIDER_NAME}}
-      SA_EMAIL: ${{secrets.SA_EMAIL}}
+      PROVIDER_NAME: ${{secrets.PROVIDER_NAME_STAGING}}
+      SA_EMAIL: ${{secrets.SA_EMAIL_STAGING}}
