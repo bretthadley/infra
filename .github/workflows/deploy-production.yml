@@ -26,5 +26,7 @@ jobs:
       with:
         workload_identity_provider: '${{ secrets.PROVIDER_NAME }}'
         service_account: '${{ secrets.SA_EMAIL }}'
+        ACTIONS_ID_TOKEN_REQUEST_URL: $ACTIONS_ID_TOKEN_REQUEST_URL
+        ACTIONS_ID_TOKEN_REQUEST_TOKEN: $ACTIONS_ID_TOKEN_REQUEST_TOKEN
         environment_name: production
         apply: false

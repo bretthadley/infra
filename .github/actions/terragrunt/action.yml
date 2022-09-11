@@ -12,15 +12,25 @@ inputs:
     description: "Root folder the terragrunt environment lives"
     default: "live"
   workload_identity_provider:
-    description: "gcp auth"
+    description: "OIDC"
     required: true
   service_account:
-    description: "gcp auth"
+    description: "OIDC"
+    required: true
+  ACTIONS_ID_TOKEN_REQUEST_TOKEN:
+    description: "OIDC"
+    required: true
+  ACTIONS_ID_TOKEN_REQUEST_URL:
+    description: "OIDC"
     required: true
     
 permissions:
   id-token: write
   contents: read
+
+env:
+  ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ inputs.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
+  ACTIONS_ID_TOKEN_REQUEST_URL: ${{ inputs.ACTIONS_ID_TOKEN_REQUEST_URL }}
 
 runs:
   using: "composite"
